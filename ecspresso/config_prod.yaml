@@ -1,0 +1,10 @@
+region: ap-northeast-1
+cluster: example-prod-snsapp
+service: example-prod-snsapp
+service_definition: ecs-service-def.json
+task_definition: ecs-task-def.json
+timeout: 10m0s
+plugins:
+  - name: tfstate
+    config:
+      url: s3://shonansurvivors-tfstate/example/prod/cicd/app_snsapp_v1.0.0.tfstate

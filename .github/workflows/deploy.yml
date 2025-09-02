@@ -57,12 +57,12 @@ jobs:
           key: npm-v1-${{ hashFiles('backend/package-lock.json') }}
 
       - run: |
-          docker compose exec -T web chown -R root:root /root/.npm || true
+          docker compose exec -T web rm -rf /root/.npm
           docker compose exec -T web npm ci
         if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
 
       - run: |
-          docker compose exec -T web chown -R root:root /root/.npm || true
+          docker compose exec -T web rm -rf /root/.npm
           docker compose exec -T web npm run prod
 
       - uses: aws-actions/amazon-ecr-login@v1

@@ -22,20 +22,20 @@
     {
       "containerName": "nginx",
       "containerPort": 80,
-      "targetGroupArn": "{{ tfstate `data.aws_lb_target_group.this.arn` }}"
+      "targetGroupArn": "{{ tfstate `data.terraform_remote_state.routing_appsnsapp_link.outputs.lb_target_group_snsapp_arn` }}"
     }
   ],
   "networkConfiguration": {
     "awsvpcConfiguration": {
       "assignPublicIp": "DISABLED",
       "securityGroups": [
-        "{{ tfstate `data.aws_security_group.vpc.id` }}",
-        "{{ tfstate `data.aws_security_group.db_snsapp.id` }}",
-        "{{ tfstate `data.aws_security_group.cache_snsapp.id` }}"
+        "{{ tfstate `data.terraform_remote_state.network_main.outputs.security_group_vpc_id` }}",
+        "{{ tfstate `data.terraform_remote_state.network_main.outputs.security_group_db_snsapp_id` }}",
+        "{{ tfstate `data.terraform_remote_state.network_main.outputs.security_group_cache_snsapp_id` }}"
       ],
       "subnets": [
-        "{{ tfstate `data.aws_subnet.private['a'].id` }}",
-        "{{ tfstate `data.aws_subnet.private['c'].id` }}"
+        "{{ tfstate `data.terraform_remote_state.network_main.outputs.subnet_private[\"a\"].id` }}",
+        "{{ tfstate `data.terraform_remote_state.network_main.outputs.subnet_private[\"c\"].id` }}"
       ]
     }
   },
